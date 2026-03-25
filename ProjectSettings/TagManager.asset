@@ -10,6 +10,8 @@ TagManager:
   - RightController
   - PlayerState
   - Interactor
+  - Lock
+  - SanityManager
   layers:
   - Default
   - TransparentFX
