@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/OriginScene.unity
+    guid: b0c8103cf4a235a41823760f75eb269d
+  - enabled: 1
+    path: Assets/Scenes/HubScene.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/MazeScene.unity
+    guid: f3d3a398189b74640bfa8c10cdc58aea
+  - enabled: 1
+    path: Assets/Scenes/HallScene.unity
+    guid: cc0f0b980c249064f8848fb5529d2f2e
+  - enabled: 1
+    path: Assets/Scenes/GhostScene.unity
+    guid: b8049d8f091fe3243a95e9e360b3fc39
+  m_configObjects:
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 6a8359712ed3bbb4bab5edf9eb64886e, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 38c40e0b947ae754f8761dc02ad21169, type: 2}
+  m_UseUCBPForAssetBundles: 0
