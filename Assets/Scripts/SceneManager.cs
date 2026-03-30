@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class SceneManager : MonoBehaviour
 {
     [SerializeField] SoundManager soundManager;
+    [SerializeField] SanityManager sanityManager;
     string _place = "HubScene";
     public string Place {  get { return _place; } }
     public void Teleport(string place)
@@ -12,6 +13,8 @@ public class SceneManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(place, LoadSceneMode.Additive);
         _place = place;
         soundManager.ChangeSounds(_place);
+        sanityManager.ChangeValue(100);
+        sanityManager.ChangeMultiplier(place);
     }
     public void Reload()
     {

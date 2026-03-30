@@ -1,21 +1,22 @@
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class Key : MonoBehaviour
 {
-    bool _isRight;
     SanityManager _sanityManager;
-    [SerializeField] GameObject door;
     private void Awake()
     {
         _sanityManager = GameObject.FindWithTag("SanityManager").GetComponent<SanityManager>();
     }
-    private void OnCollisionEnter(Collision collision)
+    public void IsFound() 
     {
-        if (!_isRight) return;
-        if (collision.gameObject.CompareTag("Lock"))
-        {
-            Rigidbody rb = door.GetComponent<Rigidbody>();
-            if (rb != null) rb.isKinematic = false;
-        }
+        _sanityManager.ChangeValue(1);
+    }
+    public void FixateKey(Transform t)
+    {
+        GetComponent<XRGrabInteractable>().enabled = false;
+        GetComponent<Rigidbody>().isKinematic = true;
+        transform.SetParent(t);
+
     }
 }

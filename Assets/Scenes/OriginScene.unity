@@ -726,6 +726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundManager: {fileID: 1902308430}
+  sanityManager: {fileID: 1594066098}
 --- !u!4 &556352210
 Transform:
   m_ObjectHideFlags: 0
