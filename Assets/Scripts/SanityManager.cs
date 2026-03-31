@@ -6,15 +6,17 @@ public class SanityManager : MonoBehaviour
 {
     [SerializeField] PlayerState playerState;
     WaitForSeconds wait = new WaitForSeconds(1f);
-    Dictionary<string, float> multipliers = new Dictionary<string, float>() { { "HubScene", 0}, { "MazeScene", 0.01f }, {"HallScene", 0.03f}, {"GhostScene", 0.05f} };
+    Dictionary<string, float> multipliers = new Dictionary<string, float>() { { "HubScene", 0 }, { "MazeScene", 0.1f }, { "HallScene", 0.3f }, { "GhostScene", 0.5f } };
     float currentMultiplier = 0;
+    Coroutine sanityCoroutine;
     private void Start()
     {
-        StartCoroutine(DecreaseSanityRoutine());
+        sanityCoroutine = StartCoroutine(DecreaseSanityRoutine());
     }
     private void OnDisable()
     {
-        StopCoroutine(DecreaseSanityRoutine());
+        if (sanityCoroutine != null)
+        StopCoroutine(sanityCoroutine);
     }
 
     IEnumerator DecreaseSanityRoutine()
@@ -32,11 +34,11 @@ public class SanityManager : MonoBehaviour
     }
     public void ChangeValue(float value)
     {
+        if (playerState.Difficulty != 3)
         playerState.ChangeSanity(value);
     }
-    public int CheckStatus()
+    public float GetSanity()
     {
-        if (playerState.Sanity == 0) return 0;
-        else return 1;
+        return playerState.Sanity;
     }
 }

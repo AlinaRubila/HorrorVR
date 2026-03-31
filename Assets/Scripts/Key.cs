@@ -4,13 +4,18 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 public class Key : MonoBehaviour
 {
     SanityManager _sanityManager;
+    bool firstPick = true;
     private void Awake()
     {
         _sanityManager = GameObject.FindWithTag("SanityManager").GetComponent<SanityManager>();
     }
     public void IsFound() 
     {
-        _sanityManager.ChangeValue(1);
+        if (firstPick)
+        {
+            _sanityManager.ChangeValue(1);
+            firstPick = false;
+        }
     }
     public void FixateKey(Transform t)
     {

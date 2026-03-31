@@ -12,6 +12,7 @@ TagManager:
   - Interactor
   - SanityManager
   - RightKey
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

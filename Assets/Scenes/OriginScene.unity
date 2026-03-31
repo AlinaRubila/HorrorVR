@@ -552,8 +552,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 115754061793363699, guid: d7354057070115540a40a109e835dc89, type: 2}
-  m_audioClip: {fileID: 8300000, guid: e59b4a7dabcf66d45a6693dbe2883050, type: 3}
-  m_Resource: {fileID: 8300000, guid: e59b4a7dabcf66d45a6693dbe2883050, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ba643603bb22f3e48be7a4859dc701c2, type: 3}
+  m_Resource: {fileID: 8300000, guid: ba643603bb22f3e48be7a4859dc701c2, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -639,6 +639,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!4 &454515025 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+  m_PrefabInstance: {fileID: 372816266}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &469604144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -816,9 +821,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89e880518ce53234a801022fe9524e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundManager: {fileID: 1902308430}
-  sceneManager: {fileID: 556352209}
-  GBManager: {fileID: 624750927}
+  previousPosition: {x: 0, y: 0.169, z: 2.48}
+  player: {fileID: 454515025}
+  _soundManager: {fileID: 1902308430}
+  _sceneManager: {fileID: 556352209}
+  _GBManager: {fileID: 624750927}
 --- !u!4 &1199805861
 Transform:
   m_ObjectHideFlags: 0

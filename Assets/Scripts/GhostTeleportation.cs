@@ -1,60 +1,91 @@
-using Unity.VisualScripting;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class GhostTeleportation : MonoBehaviour
 {
-    Transform player;
-    [SerializeField] private GameObject ghost;
+    Transform _player;
+    SanityManager _sanityManager;
+    SoundManager _soundManager;
+    [SerializeField] AudioSource source;
+    [SerializeField] List<AudioClip> clips;
+    [SerializeField] GameObject ghost;
     float[] teleportDistances = new float[] { 6f, 10f, 15f};
     float[] disappearTime = new float[] { 5f, 7f, 10f, 12f, 15f };
     float hideDistance = 5f;
-    bool isHidden = false;
-    int sanityLevel = 10;
-    float timer = 0f;
+    bool isHidden = true;
     bool gotPlace = false;
+    Coroutine teleportCoroutine;
+    System.Random rand = new System.Random();
+    float targetDisappearTime;
+    float disappearTimer = 0f;
+    WaitForSeconds twoSeconds = new WaitForSeconds(2);
     private void Awake()
     {
-        player = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
+        _player = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
+        _sanityManager = GameObject.FindWithTag("SanityManager").GetComponent<SanityManager>();
+        _soundManager = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
+        ghost.SetActive(false);
     }
-
-    void Update()
+    private void Start()
     {
-        timer += Time.deltaTime;
-        if ((timer >= 2 * (sanityLevel / 10) && !gotPlace) || (timer > 10 * (sanityLevel / 10))) TeleportGhost();
-        System.Random rand = new System.Random();
-        float randomTime = disappearTime[rand.Next(5)];
-        if (gotPlace && timer >= randomTime && timer < randomTime + 1) Disappear();
-        if (System.Math.Round(timer) % 2 == 0) CheckDistance(); 
+        teleportCoroutine = StartCoroutine(Teleport());
+    }
+    private void OnDisable()
+    {
+        if (teleportCoroutine != null) StopCoroutine(teleportCoroutine);
+    }
+    IEnumerator Teleport()
+    {
+        while (true)
+        {
+            if (isHidden)
+            {
+                float waitTime = 2 * (_sanityManager.GetSanity() / 10f);
+                yield return new WaitForSeconds(waitTime);
+                TeleportGhost();
+                continue;
+            }
+            else if (!isHidden && gotPlace)
+            {
+                float distance = Vector3.Distance(transform.position, _player.position);
+                if (distance <= hideDistance) 
+                {
+                    Disappear();
+                    disappearTimer = 0f;
+                    yield return twoSeconds;
+                    continue;
+                }
+                disappearTimer += Time.deltaTime;
+                if (disappearTimer >= targetDisappearTime)
+                {
+                    Disappear();
+                    yield return twoSeconds;
+                }
+            }
+            yield return null;
+        }
     }
     void TeleportGhost()
     {
-
-        if (isHidden) 
-        {
-            ghost.SetActive(true);
-            isHidden = false;
-        }
+        Debug.Log("Teleport");
+        ghost.SetActive(true);
+        isHidden = false;
         gotPlace = true;
-        System.Random rand = new System.Random();
-        Vector3 randomPos = Random.onUnitSphere * teleportDistances[rand.Next(3)] + player.position;
-        transform.position = new Vector3(randomPos.x, transform.position.y, randomPos.z);
-        Vector3 directionToPlayer = player.position - transform.position;
+        disappearTimer = 0f;
+        targetDisappearTime = disappearTime[rand.Next(disappearTime.Length)];
+        Vector2 randomPos = Random.insideUnitCircle.normalized * (teleportDistances[rand.Next(3)]);
+        transform.position = new Vector3(randomPos.x+_player.position.x, transform.position.y, randomPos.y+_player.position.z);
+        Vector3 directionToPlayer = _player.position - transform.position;
         float angleY = Mathf.Atan2 (directionToPlayer.x, directionToPlayer.z) * Mathf.Rad2Deg;
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, angleY+80f, transform.eulerAngles.z);
-        timer = 0f;
     }
-    void CheckDistance()
-    {
-        float distance = Vector3.Distance(transform.position, player.position);
-        if (distance <= hideDistance && gotPlace) Disappear();
-     }
     void Disappear()
     {
         gotPlace = false;
         ghost.SetActive(false);
         transform.position = new Vector3(0, transform.position.y, 0);
         isHidden = true;
-        timer = 0f;
+        Debug.Log("Disappear");
     }
 }
