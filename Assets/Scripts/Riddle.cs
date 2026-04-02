@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Locomotion.Turning;
 
 public class Riddle : MonoBehaviour
 {
@@ -24,25 +25,15 @@ public class Riddle : MonoBehaviour
                 door.isKinematic = false;
                 portal.SetActive(true);
             }
-            else
-            {
-                Debug.Log(cameraTransform.forward);
-                Teleport();
-                Debug.Log(cameraTransform.forward);
-            }
+            else Teleport();
         }
     }
     public void Teleport()
     {
-        Vector3 offset = cameraTransform.localPosition;
+        if (charController == null) return;
+        charController.enabled = false;
+        Vector3 offset = cameraTransform.position - player.position;
         player.position = middle.position - offset;
-        Vector3 cameraForward = cameraTransform.forward;
-        cameraForward.y = 0f;
-        player.rotation = Quaternion.LookRotation(-cameraForward);
-        if (charController != null)
-        {
-            charController.enabled = false;
-            charController.enabled = true;
-        }
+        charController.enabled = true;
     }
 }

@@ -1,24 +1,34 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class SceneManager : MonoBehaviour
 {
     [SerializeField] SoundManager soundManager;
     [SerializeField] SanityManager sanityManager;
+    [SerializeField] Transform player;
     string _place = "HubScene";
     public string Place {  get { return _place; } }
     public void Teleport(string place)
     {
-        UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(_place);
-        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(place, LoadSceneMode.Additive);
+        StartCoroutine(LoadAndTeleport(place));
+    }
+    IEnumerator LoadAndTeleport(string place)
+    {
+        yield return UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(_place);
+        yield return UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(place, LoadSceneMode.Additive);
+        Scene newScene = UnityEngine.SceneManagement.SceneManager.GetSceneByName(place);
+        UnityEngine.SceneManagement.SceneManager.SetActiveScene(newScene);
+        GameObject spawnPoint = GameObject.FindWithTag("SpawnPoint");
+        if (spawnPoint != null)
+        {
+            player.position = spawnPoint.transform.position;
+            player.rotation = spawnPoint.transform.rotation;
+        }
         _place = place;
         soundManager.ChangeSounds(_place);
         sanityManager.ChangeValue(100);
         sanityManager.ChangeMultiplier(place);
-    }
-    public void Reload()
-    {
-
     }
     void Start()
     {

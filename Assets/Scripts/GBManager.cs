@@ -7,10 +7,17 @@ public class GBManager : MonoBehaviour
     [SerializeField] Volume globalVolume;
     ChromaticAberration chromaticAberration;
     ColorAdjustments colorAdjustments;
+    Vignette vignette;
     private void Start()
     {
         globalVolume.profile.TryGet(out chromaticAberration);
         globalVolume.profile.TryGet(out colorAdjustments);
+        globalVolume.profile.TryGet(out vignette);
+    }
+    public void SetVignette(float value)
+    {
+        if (vignette == null) return;
+        vignette.intensity.value = value;
     }
     public void ChangeEffects(float value)
     {
