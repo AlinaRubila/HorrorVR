@@ -47,7 +47,7 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            currentPitch += value * 0.1f;
+            currentPitch += value * 0.01f;
             currentPitch = Mathf.Clamp(currentPitch, 0.4f, 1f);
         }
         mixer.SetFloat("masterPitch", currentPitch);
