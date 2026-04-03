@@ -14,6 +14,8 @@ TagManager:
   - RightKey
   - SpawnPoint
   - GBManager
+  - Key
+  - InteractionManager
   layers:
   - Default
   - TransparentFX

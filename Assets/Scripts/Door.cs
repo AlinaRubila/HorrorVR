@@ -6,7 +6,6 @@ public class Door : MonoBehaviour
     [SerializeField] AudioSource source;
     [SerializeField] HingeJoint hinge;
     float minVelocity = 0.5f;
-    float previousAngle = 0f;
     float velocity;
     private void Update()
     {

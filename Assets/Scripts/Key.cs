@@ -21,7 +21,7 @@ public class Key : MonoBehaviour
     {
         GetComponent<XRGrabInteractable>().enabled = false;
         GetComponent<Rigidbody>().isKinematic = true;
-        transform.SetParent(t);
+        gameObject.SetActive(false);
 
     }
 }

@@ -21,6 +21,7 @@ public class PlayerState : MonoBehaviour
             _soundManager.ManageFootsteps(1);
             distance = 0;
         }
+        else if (distance == 0) _soundManager.ManageFootsteps(0);
     }
     public void ChangeSanity(float value)
     {

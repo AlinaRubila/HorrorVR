@@ -27,7 +27,10 @@ public class SoundManager : MonoBehaviour
                 player.Play();
             }
         }
-        else { player.Stop(); }
+        else 
+        { 
+            if (player.isPlaying) player.Stop(); 
+        }
     }
     public void PlaySound(AudioSource source, AudioClip clip)
     {

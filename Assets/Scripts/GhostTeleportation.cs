@@ -68,7 +68,6 @@ public class GhostTeleportation : MonoBehaviour
     }
     void TeleportGhost()
     {
-        Debug.Log("Teleport");
         ghost.SetActive(true);
         isHidden = false;
         gotPlace = true;
@@ -87,6 +86,5 @@ public class GhostTeleportation : MonoBehaviour
         ghost.SetActive(false);
         transform.position = new Vector3(0, transform.position.y, 0);
         isHidden = true;
-        Debug.Log("Disappear");
     }
 }
