@@ -7053,7 +7053,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1796128490
 Transform:
   m_ObjectHideFlags: 0
@@ -8771,7 +8771,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6626140041931993919, guid: 40a5fa5dfb7d7c0438463404fdb18a9c, type: 3}
       propertyPath: destination
-      value: MazeScene2
+      value: MazeScene
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
