@@ -49,6 +49,9 @@ public class PlayerState : MonoBehaviour
         if (_sanity <= 0)
         {
             _sceneManager.Teleport("HubScene");
+            _soundManager.ChangeEffects(100);
+            _GBManager.ChangeEffects(100);
+            _GBManager.SetVignette(0);
         }
     }
     public void ChangeDiffuculty(int level) 

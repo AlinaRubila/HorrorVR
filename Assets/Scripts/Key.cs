@@ -5,9 +5,13 @@ public class Key : MonoBehaviour
 {
     SanityManager _sanityManager;
     bool firstPick = true;
+    Vector3 _startPosition;
+    XRGrabInteractable _grab;
     private void Awake()
     {
         _sanityManager = GameObject.FindWithTag("SanityManager").GetComponent<SanityManager>();
+        _startPosition = transform.position;
+        _grab = GetComponent<XRGrabInteractable>();
     }
     public void IsFound() 
     {
@@ -19,9 +23,15 @@ public class Key : MonoBehaviour
     }
     public void FixateKey(Transform t)
     {
-        GetComponent<XRGrabInteractable>().enabled = false;
+        _grab.enabled = false;
         GetComponent<Rigidbody>().isKinematic = true;
         gameObject.SetActive(false);
-
+    }
+    public void BackToStart()
+    {
+        if (firstPick) return;
+        _grab.enabled = false;
+        transform.position = _startPosition;
+        _grab.enabled = true;
     }
 }

@@ -32,7 +32,7 @@ public class Riddle : MonoBehaviour
     {
         if (charController == null) return;
         charController.enabled = false;
-        Vector3 offset = cameraTransform.position - player.position;
+        Vector3 offset = Camera.main.transform.position - player.position;
         player.position = middle.position - offset;
         charController.enabled = true;
     }

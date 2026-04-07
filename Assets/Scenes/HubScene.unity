@@ -8771,7 +8771,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6626140041931993919, guid: 40a5fa5dfb7d7c0438463404fdb18a9c, type: 3}
       propertyPath: destination
-      value: MazeScene
+      value: MazeScene2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

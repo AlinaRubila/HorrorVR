@@ -14,6 +14,7 @@ public class MonsterChase : MonoBehaviour
     [SerializeField] AudioSource _steps;
     [SerializeField] AudioClip[] _stepsSounds;
     [SerializeField] Transform[] _patrolPoints;
+    [SerializeField] Key[] keys;
     Vector3 startPoint;
     float _timer = 0f;
     float _updateRate = 0.5f;
@@ -105,6 +106,7 @@ public class MonsterChase : MonoBehaviour
     void Respawn() 
     {
         //_soundManager.PlaySound(_breath, _breathSounds[currentPoint]);
+        foreach (Key k in keys) k.BackToStart();
         _agent.enabled = false;
         _agent.Warp(startPoint);
         _agent.enabled = true;

@@ -7,6 +7,7 @@ public class SceneManager : MonoBehaviour
     [SerializeField] SoundManager soundManager;
     [SerializeField] SanityManager sanityManager;
     [SerializeField] Transform player;
+    [SerializeField] ScreenFade fader;
     string _place = "HubScene";
     public string Place {  get { return _place; } }
     public void Teleport(string place)
@@ -15,6 +16,7 @@ public class SceneManager : MonoBehaviour
     }
     IEnumerator LoadAndTeleport(string place)
     {
+        yield return StartCoroutine(fader.FadeOut());
         yield return UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(_place);
         yield return UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(place, LoadSceneMode.Additive);
         Scene newScene = UnityEngine.SceneManagement.SceneManager.GetSceneByName(place);
@@ -29,6 +31,7 @@ public class SceneManager : MonoBehaviour
         soundManager.ChangeSounds(_place);
         sanityManager.ChangeValue(100);
         sanityManager.ChangeMultiplier(place);
+        yield return StartCoroutine(fader.FadeIn());
     }
     void Start()
     {
