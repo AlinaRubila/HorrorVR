@@ -14,9 +14,16 @@ public class SoundManager : MonoBehaviour
     float currentPitch;
     public void ChangeSounds(string place)
     {
-        background.clip = ambients[Array.IndexOf(places, place)];
+        if (place == "GhostScene")
+        {
+            background.Stop();
+        }
+        else
+        {
+            background.clip = ambients[Array.IndexOf(places, place)];
+            background.Play();
+        }
         player.clip = footsteps[Array.IndexOf(places, place)];
-        background.Play();
     }
     public void ManageFootsteps(int i)
     {

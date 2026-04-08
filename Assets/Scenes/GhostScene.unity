@@ -1137,7 +1137,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 1492543757}
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: 42e3838a5ce95e94a9ef1f52a4260f42, type: 3}
+  - {fileID: 8300000, guid: 691344214c3692f4fb4584527151f117, type: 3}
+  - {fileID: 8300000, guid: 36ec79df3594709449e87b2ed8d822aa, type: 3}
+  - {fileID: 8300000, guid: 65d7f12a90528fc4399b360b411056b7, type: 3}
+  - {fileID: 8300000, guid: 37a824bb51e33af48a55e1ef6a252323, type: 3}
   ghost: {fileID: 973587538}
 --- !u!4 &1323736801
 Transform:
@@ -1480,8 +1485,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 3328116214213790041, guid: d7354057070115540a40a109e835dc89, type: 2}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 42e3838a5ce95e94a9ef1f52a4260f42, type: 3}
+  m_Resource: {fileID: 8300000, guid: 42e3838a5ce95e94a9ef1f52a4260f42, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

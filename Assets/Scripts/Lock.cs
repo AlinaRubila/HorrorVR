@@ -9,7 +9,8 @@ public class Lock : MonoBehaviour
     [SerializeField] Material wrong;
     [SerializeField] Material standart;
     [SerializeField] Renderer lamp;
-
+    [SerializeField] AudioSource source;
+    [SerializeField] AudioClip[] clips;
     private void Awake()
     {
         _sanityManager = GameObject.FindWithTag("SanityManager").GetComponent<SanityManager>();
@@ -19,6 +20,8 @@ public class Lock : MonoBehaviour
         if (other.gameObject.CompareTag("RightKey"))
         {
             Rigidbody rb = door.GetComponent<Rigidbody>();
+            source.clip = clips[0];
+            source.Play();
             lamp.material = correct;
             if (rb != null) rb.isKinematic = false;
             other.gameObject.GetComponent<Key>().FixateKey(transform);
@@ -28,6 +31,8 @@ public class Lock : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Key"))
         {
+            source.clip = clips[1];
+            source.Play();
             lamp.material = wrong;
             Invoke(nameof(TurnNormal), 1f);
         }

@@ -73,7 +73,7 @@ public class GhostTeleportation : MonoBehaviour
         gotPlace = true;
         disappearTimer = 0f;
         targetDisappearTime = disappearTime[rand.Next(disappearTime.Length)];
-        //_soundManager.PlaySound(source, clips[rand.Next(5)]);
+        _soundManager.PlaySound(source, clips[rand.Next(5)]);
         Vector2 randomPos = Random.insideUnitCircle.normalized * (teleportDistances[rand.Next(3)]);
         transform.position = new Vector3(randomPos.x+_player.position.x, transform.position.y, randomPos.y+_player.position.z);
         Vector3 directionToPlayer = _player.position - transform.position;

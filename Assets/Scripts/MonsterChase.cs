@@ -20,7 +20,7 @@ public class MonsterChase : MonoBehaviour
     float _updateRate = 0.5f;
     Vector3 _lastPlayerPos;
     float _detectDistance = 7f;
-    float disappearDistance = 2f;
+    float disappearDistance = 1f;
     int _currentPoint = 0;
     bool _isChasing = false;
     float _repathTimer = 0f;
@@ -66,7 +66,7 @@ public class MonsterChase : MonoBehaviour
             if (!_isChasing)
             {
                 _isChasing = true;
-                //_soundManager.PlaySound(_steps, _stepsSounds[1]);
+                _soundManager.PlaySound(_steps, _stepsSounds[1]);
                 _agent.speed = _chaseSpeed;
                 _agent.SetDestination(_player.position);
                 _lastPlayerPos = _player.position;
@@ -84,7 +84,8 @@ public class MonsterChase : MonoBehaviour
             }
             float t = 3f - (Mathf.Sqrt(sqrDist) / _detectDistance);
             _sanityManager.ChangeValue(-t);
-            _gBManager.SetVignette(t/2);
+            _gBManager.SetVignette(t/4);
+            _gBManager.ChangeEffects(t / 4);
         }
         else
         {
@@ -93,7 +94,7 @@ public class MonsterChase : MonoBehaviour
                 _isChasing = false;
                 _agent.speed = 0.5f;
                 _gBManager.SetVignette(0);
-                //_soundManager.PlaySound(_steps, _stepsSounds[0]);
+                _soundManager.PlaySound(_steps, _stepsSounds[0]);
                 _agent.ResetPath();
             }
             if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
@@ -105,14 +106,14 @@ public class MonsterChase : MonoBehaviour
     }
     void Respawn() 
     {
-        //_soundManager.PlaySound(_breath, _breathSounds[currentPoint]);
         foreach (Key k in keys) k.BackToStart();
         _agent.enabled = false;
         _agent.Warp(startPoint);
         _agent.enabled = true;
         _agent.speed = 0.5f;
-        //_soundManager.PlaySound(_steps, _stepsSounds[0]);
+        _soundManager.PlaySound(_steps, _stepsSounds[0]);
         _gBManager.SetVignette(0);
+        _gBManager.ChangeEffects(-10);
         _isChasing = false;
         _agent.SetDestination(_patrolPoints[0].position);
     }

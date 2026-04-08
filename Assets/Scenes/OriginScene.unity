@@ -249,15 +249,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1767192439, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_BackGroundColor.b
-      value: 0.06289297
+      value: 0.025157154
       objectReference: {fileID: 0}
     - target: {fileID: 1767192439, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_BackGroundColor.g
-      value: 0.023912989
+      value: 0.009548027
       objectReference: {fileID: 0}
     - target: {fileID: 1767192439, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_BackGroundColor.r
-      value: 0.009295497
+      value: 0.0026106453
       objectReference: {fileID: 0}
     - target: {fileID: 1767192439, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_projectionMatrixMode
@@ -631,7 +631,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -876,7 +876,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1826,14 +1826,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ambients:
   - {fileID: 8300000, guid: 5df41c238d33e4145a517def2178140c, type: 3}
+  - {fileID: 8300000, guid: 30c1a4a05c15ae84cb52d057fef61972, type: 3}
   - {fileID: 8300000, guid: c6130cc5b5803554d94bf563814bfd68, type: 3}
-  - {fileID: 8300000, guid: 5df41c238d33e4145a517def2178140c, type: 3}
   - {fileID: 8300000, guid: c6130cc5b5803554d94bf563814bfd68, type: 3}
   footsteps:
   - {fileID: 8300000, guid: ba643603bb22f3e48be7a4859dc701c2, type: 3}
-  - {fileID: 8300000, guid: e59b4a7dabcf66d45a6693dbe2883050, type: 3}
+  - {fileID: 8300000, guid: 04b2295a5534f5544b649c1f75e8dc0e, type: 3}
   - {fileID: 8300000, guid: cc76c35f80e1e974898eba93509a03b6, type: 3}
-  - {fileID: 8300000, guid: ba643603bb22f3e48be7a4859dc701c2, type: 3}
+  - {fileID: 8300000, guid: c661319fbbe4c914597af725a5d22189, type: 3}
   player: {fileID: 454515019}
   background: {fileID: 1782612072}
   mixer: {fileID: 24100000, guid: d7354057070115540a40a109e835dc89, type: 2}
