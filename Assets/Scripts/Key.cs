@@ -23,8 +23,16 @@ public class Key : MonoBehaviour
     }
     public void FixateKey(Transform t)
     {
+        var manager = _grab.interactionManager;
+
+        if (_grab.isSelected)
+        {
+            var interactor = _grab.firstInteractorSelecting;
+            manager.SelectExit(interactor, _grab);
+        }
         _grab.enabled = false;
-        GetComponent<Rigidbody>().isKinematic = true;
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.isKinematic = true;
         gameObject.SetActive(false);
     }
     public void BackToStart()
