@@ -15,16 +15,13 @@ public class MonsterChase : MonoBehaviour
     [SerializeField] AudioClip[] _stepsSounds;
     [SerializeField] Transform[] _patrolPoints;
     [SerializeField] Key[] keys;
+    [SerializeField] Transform _face;
     Vector3 startPoint;
     float _timer = 0f;
-    float _updateRate = 0.5f;
     Vector3 _lastPlayerPos;
-    float _detectDistance = 7f;
-    float disappearDistance = 1f;
     int _currentPoint = 0;
     bool _isChasing = false;
     float _repathTimer = 0f;
-    float _repathRate = 0.5f;
     float _chaseSpeed = 0f;
     private void Awake()
     {
@@ -33,7 +30,7 @@ public class MonsterChase : MonoBehaviour
         _soundManager = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
         _gBManager = GameObject.FindWithTag("GBManager").GetComponent<GBManager>();
         DynamicMoveProvider moveProvider = GameObject.FindWithTag("Player").GetComponentInChildren<DynamicMoveProvider>();
-        _chaseSpeed = moveProvider.moveSpeed - 1f;
+        _chaseSpeed = moveProvider.moveSpeed / 2;
         startPoint = transform.position;
     }
     private void Start()
@@ -48,20 +45,24 @@ public class MonsterChase : MonoBehaviour
     {
         _timer += Time.deltaTime;
         _repathTimer += Time.deltaTime;
-        if (_timer < _updateRate) return;
+        if (_timer < 0.5f) return;
         _timer = 0;
         MoveAgent();
+    }
+    private void LateUpdate()
+    {
+        RotateFace();
     }
     void MoveAgent() 
     {
         Vector3 toPlayer = _player.position - transform.position;
         float sqrDist = toPlayer.sqrMagnitude;
-        if (sqrDist <= disappearDistance * disappearDistance)
+        if (sqrDist <= 2f * 2f)
         { 
             Respawn();
             return;
         }
-        if (sqrDist <= _detectDistance * _detectDistance)
+        if (sqrDist <= 6.5f * 6.5f)
         {
             if (!_isChasing)
             {
@@ -72,7 +73,7 @@ public class MonsterChase : MonoBehaviour
                 _lastPlayerPos = _player.position;
                 _repathTimer = 0f;
             }
-            if (_repathTimer >= _repathRate)
+            if (_repathTimer >= 0.5f)
             {
                 float moveDelta = (_player.position - _lastPlayerPos).sqrMagnitude;
                 if (moveDelta > 0.25f)
@@ -82,7 +83,7 @@ public class MonsterChase : MonoBehaviour
                 }
                 _repathTimer = 0f;
             }
-            float t = 3f - (Mathf.Sqrt(sqrDist) / _detectDistance);
+            float t = 3f - (Mathf.Sqrt(sqrDist) / 6.5f);
             _sanityManager.ChangeValue(-t);
             _gBManager.SetVignette(t/4);
             _gBManager.ChangeEffects(t / 4);
@@ -116,5 +117,15 @@ public class MonsterChase : MonoBehaviour
         _gBManager.ChangeEffects(-10);
         _isChasing = false;
         _agent.SetDestination(_patrolPoints[0].position);
+    }
+    void RotateFace()
+    {
+        Vector3 direction = _agent.velocity;
+        direction.y = 0;
+        if (direction.sqrMagnitude > 0.01f)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(direction) * Quaternion.Euler(0, 180, 0);
+            _face.rotation = Quaternion.Slerp(_face.rotation, lookRotation, Time.deltaTime * 2f);
+        }
     }
 }

@@ -16,6 +16,7 @@ TagManager:
   - GBManager
   - Key
   - InteractionManager
+  - Ghost
   layers:
   - Default
   - TransparentFX

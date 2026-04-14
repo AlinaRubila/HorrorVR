@@ -80,7 +80,7 @@ public class GhostTeleportation : MonoBehaviour
         float angleY = Mathf.Atan2 (directionToPlayer.x, directionToPlayer.z) * Mathf.Rad2Deg;
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, angleY+80f, transform.eulerAngles.z);
     }
-    void Disappear()
+    public void Disappear()
     {
         gotPlace = false;
         ghost.SetActive(false);
