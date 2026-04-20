@@ -25,7 +25,6 @@ public class SceneManager : MonoBehaviour
         if (spawnPoint != null)
         {
             player.position = spawnPoint.transform.position;
-            player.rotation = spawnPoint.transform.rotation;
         }
         _place = place;
         soundManager.ChangeSounds(_place);
