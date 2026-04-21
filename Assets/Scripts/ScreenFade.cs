@@ -11,7 +11,7 @@ public class ScreenFade : MonoBehaviour
         while (t < 1)
         {
             t += Time.deltaTime * 2;
-            fadeImage.color = new Color(0, 0, 0, t);
+            fadeImage.color = new Color(1, 1, 1, t);
             yield return null;
         }
     }
@@ -21,7 +21,7 @@ public class ScreenFade : MonoBehaviour
         while (t > 0)
         {
             t -= Time.deltaTime * 2;
-            fadeImage.color = new Color(0, 0, 0, t);
+            fadeImage.color = new Color(1, 1, 1, t);
             yield return null;
         }
     }
