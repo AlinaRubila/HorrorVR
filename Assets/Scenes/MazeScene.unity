@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1614998683433746097, guid: ad0dcd7f386336348a008d1b82c762ec, type: 3}
+      propertyPath: hinge
+      value: 
+      objectReference: {fileID: 36821596}
     - target: {fileID: 1755332320074762259, guid: ad0dcd7f386336348a008d1b82c762ec, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -262,6 +266,11 @@ GameObject:
 --- !u!4 &36821595 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3889676580630187826, guid: ad0dcd7f386336348a008d1b82c762ec, type: 3}
+  m_PrefabInstance: {fileID: 36821592}
+  m_PrefabAsset: {fileID: 0}
+--- !u!59 &36821596 stripped
+HingeJoint:
+  m_CorrespondingSourceObject: {fileID: 2182514484406816651, guid: ad0dcd7f386336348a008d1b82c762ec, type: 3}
   m_PrefabInstance: {fileID: 36821592}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &101156636
@@ -7874,7 +7883,7 @@ Transform:
   m_GameObject: {fileID: 2077080785}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.486, y: 1.1, z: 0.39}
+  m_LocalPosition: {x: -1.486, y: 1.16, z: 0.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

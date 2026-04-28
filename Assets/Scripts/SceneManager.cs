@@ -19,12 +19,21 @@ public class SceneManager : MonoBehaviour
         yield return StartCoroutine(fader.FadeOut());
         yield return UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(_place);
         yield return UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(place, LoadSceneMode.Additive);
+        yield return new WaitForEndOfFrame();
         Scene newScene = UnityEngine.SceneManagement.SceneManager.GetSceneByName(place);
         UnityEngine.SceneManagement.SceneManager.SetActiveScene(newScene);
         GameObject spawnPoint = GameObject.FindWithTag("SpawnPoint");
         if (spawnPoint != null)
         {
-            player.position = spawnPoint.transform.position;
+            //CharacterController cc = player.GetComponent<CharacterController>();
+            //Debug.Log(cc == null);
+            /*if (cc != null)
+                cc.enabled = false;*/
+            Vector3 pos = spawnPoint.transform.position;
+            /*pos.y += cc.height / 2f;*/
+            player.position = pos;
+           /* if (cc != null)
+                cc.enabled = true;*/
         }
         _place = place;
         soundManager.ChangeSounds(_place);
