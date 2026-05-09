@@ -34,14 +34,14 @@ public class PlayerState : MonoBehaviour
         }
         else if (value > 0)
         {
-            a = value * (_difficulty - 0.5f) * 0.1f;
+            a = value * (_difficulty - 0.5f) * 0.3f;
             _sanity += a;
             _soundManager.ChangeEffects(a * 2);
             _GBManager.ChangeEffects(a * 2);
         }
         else 
         { 
-            a = value * _difficulty * 0.1f;
+            a = value * _difficulty * 0.3f;
             _sanity += a;
             _soundManager.ChangeEffects(a);
             _GBManager.ChangeEffects(a);

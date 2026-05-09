@@ -6,7 +6,7 @@ public class SanityManager : MonoBehaviour
 {
     [SerializeField] PlayerState playerState;
     WaitForSeconds wait = new WaitForSeconds(1f);
-    Dictionary<string, float> multipliers = new Dictionary<string, float>() { { "HubScene", 0 }, { "MazeScene", 0.1f }, { "HallScene", 0.3f }, { "GhostScene", 2f } };
+    Dictionary<string, float> multipliers = new Dictionary<string, float>() { { "HubScene", 0 }, { "MazeScene", 0.1f }, { "HallScene", 0.3f }, { "GhostScene", 1f } };
     float currentMultiplier = 0;
     Coroutine sanityCoroutine;
     private void Start()
