@@ -9,13 +9,22 @@ public class SceneManager : MonoBehaviour
     [SerializeField] Transform player;
     [SerializeField] ScreenFade fader;
     string _place = "HubScene";
+    bool isLoading = false;
     public string Place {  get { return _place; } }
     public void Teleport(string place)
     {
+        if (isLoading) return;
+        if (place == "Beyond") 
+        {
+            StartCoroutine(TeleportBeyond());
+            return;
+        }
         StartCoroutine(LoadAndTeleport(place));
+        Debug.Log($"{_place}, {place}");
     }
     IEnumerator LoadAndTeleport(string place)
     {
+        isLoading = true;
         yield return StartCoroutine(fader.FadeOut());
         yield return UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(_place);
         yield return UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(place, LoadSceneMode.Additive);
@@ -25,24 +34,27 @@ public class SceneManager : MonoBehaviour
         GameObject spawnPoint = GameObject.FindWithTag("SpawnPoint");
         if (spawnPoint != null)
         {
-            //CharacterController cc = player.GetComponent<CharacterController>();
-            //Debug.Log(cc == null);
-            /*if (cc != null)
-                cc.enabled = false;*/
             Vector3 pos = spawnPoint.transform.position;
-            /*pos.y += cc.height / 2f;*/
             player.position = pos;
-           /* if (cc != null)
-                cc.enabled = true;*/
         }
         _place = place;
         soundManager.ChangeSounds(_place);
         sanityManager.ChangeValue(100);
         sanityManager.ChangeMultiplier(place);
         yield return StartCoroutine(fader.FadeIn());
+        isLoading = false;
     }
-    void Start()
+    IEnumerator TeleportBeyond()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(_place, LoadSceneMode.Additive);
+        AudioSource source = GameObject.FindWithTag("Beyond").GetComponent<AudioSource>();
+        source.Play();
+        yield return StartCoroutine(fader.FadeOut());
+        yield return new WaitForSeconds(5f);
+        Application.Quit();
+        Debug.Log("Quit!");
+    }
+    IEnumerator Start()
+    {
+        yield return UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(_place, LoadSceneMode.Additive);
     }
 }

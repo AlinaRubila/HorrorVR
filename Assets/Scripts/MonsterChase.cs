@@ -53,6 +53,15 @@ public class MonsterChase : MonoBehaviour
     {
         RotateFace();
     }
+    public void GoToPlayer()
+    {
+        _isChasing = true;
+        _soundManager.PlaySound(_steps, _stepsSounds[1]);
+        _agent.speed = _chaseSpeed;
+        _agent.SetDestination(_player.position);
+        _lastPlayerPos = _player.position;
+        _repathTimer = 0f;
+    }
     void MoveAgent() 
     {
         Vector3 toPlayer = _player.position - transform.position;
@@ -105,7 +114,7 @@ public class MonsterChase : MonoBehaviour
             }
         }
     }
-    void Respawn() 
+    public void Respawn() 
     {
         foreach (Key k in keys) k.BackToStart();
         _agent.enabled = false;

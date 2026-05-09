@@ -15,13 +15,14 @@ public class PlayerState : MonoBehaviour
     public void Update()
     {
         distance += Vector3.Distance(player.position, previousPosition);
+        float height = player.position.y - previousPosition.y;
         previousPosition = player.position;
-        if (distance >= 1)
+        if (distance >= 1 && height >= 0)
         {
             _soundManager.ManageFootsteps(1);
             distance = 0;
         }
-        else if (distance == 0) _soundManager.ManageFootsteps(0);
+        else if (distance == 0 || height < 0) _soundManager.ManageFootsteps(0);
     }
     public void ChangeSanity(float value)
     {
@@ -34,7 +35,7 @@ public class PlayerState : MonoBehaviour
         }
         else if (value > 0)
         {
-            a = value * (_difficulty - 0.5f) * 0.3f;
+            a = value * (_difficulty - 0.5f) * 0.2f;
             _sanity += a;
             _soundManager.ChangeEffects(a * 2);
             _GBManager.ChangeEffects(a * 2);
@@ -48,6 +49,7 @@ public class PlayerState : MonoBehaviour
         }
         if (_sanity <= 0)
         {
+            _sanity = 50;
             _sceneManager.Teleport("HubScene");
             _soundManager.ChangeEffects(100);
             _GBManager.ChangeEffects(100);
