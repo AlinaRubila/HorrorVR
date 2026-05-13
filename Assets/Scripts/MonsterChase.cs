@@ -92,7 +92,7 @@ public class MonsterChase : MonoBehaviour
                 }
                 _repathTimer = 0f;
             }
-            float t = 3f - (Mathf.Sqrt(sqrDist) / 6.5f);
+            float t = 1f - (Mathf.Sqrt(sqrDist) / 6.5f);
             _sanityManager.ChangeValue(-t);
             _gBManager.SetVignette(t/4);
             _gBManager.ChangeEffects(t / 4);

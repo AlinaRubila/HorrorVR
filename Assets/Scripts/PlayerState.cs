@@ -14,15 +14,15 @@ public class PlayerState : MonoBehaviour
     public int Difficulty { get => _difficulty; }
     public void Update()
     {
+        if (player.position.y <= -1) return;
         distance += Vector3.Distance(player.position, previousPosition);
-        float height = player.position.y - previousPosition.y;
         previousPosition = player.position;
-        if (distance >= 1 && height >= 0)
+        if (distance >= 1)
         {
             _soundManager.ManageFootsteps(1);
             distance = 0;
         }
-        else if (distance == 0 || height < 0) _soundManager.ManageFootsteps(0);
+        else if (distance == 0 || player.position.y < -0.7f) _soundManager.ManageFootsteps(0);
     }
     public void ChangeSanity(float value)
     {
@@ -35,14 +35,14 @@ public class PlayerState : MonoBehaviour
         }
         else if (value > 0)
         {
-            a = value * (_difficulty - 0.5f) * 0.2f;
+            a = value * (_difficulty - 0.5f) * 0.1f;
             _sanity += a;
             _soundManager.ChangeEffects(a * 2);
             _GBManager.ChangeEffects(a * 2);
         }
         else 
         { 
-            a = value * _difficulty * 0.3f;
+            a = value * _difficulty * 0.2f;
             _sanity += a;
             _soundManager.ChangeEffects(a);
             _GBManager.ChangeEffects(a);

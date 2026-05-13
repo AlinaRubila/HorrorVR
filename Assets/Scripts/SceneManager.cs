@@ -48,8 +48,9 @@ public class SceneManager : MonoBehaviour
     {
         AudioSource source = GameObject.FindWithTag("Beyond").GetComponent<AudioSource>();
         source.Play();
-        yield return StartCoroutine(fader.FadeOut());
+        yield return StartCoroutine(fader.FadeWhite());
         yield return new WaitForSeconds(5f);
+        source.Stop();
         Application.Quit();
         Debug.Log("Quit!");
     }
