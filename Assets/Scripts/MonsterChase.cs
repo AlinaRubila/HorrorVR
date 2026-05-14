@@ -62,6 +62,10 @@ public class MonsterChase : MonoBehaviour
         _lastPlayerPos = _player.position;
         _repathTimer = 0f;
     }
+    public void ThrowRespawn()
+    {
+        if (_isChasing) Respawn();
+    }
     void MoveAgent() 
     {
         Vector3 toPlayer = _player.position - transform.position;
@@ -75,12 +79,7 @@ public class MonsterChase : MonoBehaviour
         {
             if (!_isChasing)
             {
-                _isChasing = true;
-                _soundManager.PlaySound(_steps, _stepsSounds[1]);
-                _agent.speed = _chaseSpeed;
-                _agent.SetDestination(_player.position);
-                _lastPlayerPos = _player.position;
-                _repathTimer = 0f;
+                GoToPlayer();
             }
             if (_repathTimer >= 0.5f)
             {
@@ -109,16 +108,29 @@ public class MonsterChase : MonoBehaviour
             }
             if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
             {
-                _agent.SetDestination(_patrolPoints[_currentPoint].position);
                 _currentPoint = (_currentPoint + 1) % _patrolPoints.Length;
+                _agent.SetDestination(_patrolPoints[_currentPoint].position);
             }
         }
     }
-    public void Respawn() 
+    private void Respawn() 
     {
         foreach (Key k in keys) k.BackToStart();
+        float maxDistance = 0;
+        int farPoint = 0;
+        for (int i=0; i < _patrolPoints.Length; i++)
+        {
+            float dist = (_player.position - _patrolPoints[i].position).sqrMagnitude;
+            if (dist > maxDistance)
+            {
+                maxDistance = dist;
+                farPoint = i;
+            }
+        }
         _agent.enabled = false;
-        _agent.Warp(startPoint);
+        //_agent.Warp(startPoint);
+        _agent.Warp(_patrolPoints[farPoint].position);
+        _currentPoint = farPoint;
         _agent.enabled = true;
         _agent.speed = 0.5f;
         _soundManager.PlaySound(_steps, _stepsSounds[0]);
